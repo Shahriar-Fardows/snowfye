@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
-import { Menu, X, ChevronDown, ShoppingBag, User  } from "lucide-react"
+import { Menu, X, ChevronDown  } from "lucide-react"
 import images from "../../assets/images"
+import CartLogButton from "../../Components/Reusable/Cart&log/CartLogButton"
 
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
@@ -35,26 +36,22 @@ const Navbar = () => {
       url: "/",
     },
     {
-      title: "About",
+      title: "All Products",
+      url: "/products",
+    },
+    {
+      title: "About Us",
       url: "/about",
     },
+    
     {
-      title: "Services",
-      url: "/services",
-      submenu: [
-        { title: "Web Development", url: "/services/web-development" },
-        { title: "SEO", url: "/services/seo" },
-        { title: "Marketing", url: "/services/marketing" },
-      ],
-    },
-    {
-      title: "Contact",
+      title: "Contact Us",
       url: "/contact",
-      submenu: [
-        { title: "Web Development", url: "/services/web-development" },
-        { title: "SEO", url: "/services/seo" },
-        { title: "Marketing", url: "/services/marketing" },
-      ],
+      // submenu: [
+      //   { title: "Web Development", url: "/services/web-development" },
+      //   { title: "SEO", url: "/services/seo" },
+      //   { title: "Marketing", url: "/services/marketing" },
+      // ],
     },
   ]
 
@@ -123,24 +120,16 @@ const Navbar = () => {
               </div>
             </div>
 
-            {/* Account & Cart Button */}
+            {/* Account & Cart Button for large */}
             <div className="hidden lg:flex items-center gap-7">
-              <a
-                href="#"
-                className="text-[#f98c25] hover:text-[#e07b14] transition-colors"
-              >
-                <User  className="h-6 w-6 mr-2" />
-              </a>
-              <a
-                href="#"
-                className="text-[#f98c25] hover:text-[#e07b14] transition-colors"
-              >
-                <ShoppingBag className="h-6 w-6 mr-2" />
-              </a>
+            <CartLogButton />
             </div>
+
 
             {/* Mobile menu button */}
             <div className="flex items-center lg:hidden">
+              {/* Account & Cart Button */}
+            <CartLogButton/>
               <button
                 onClick={() => setIsSidebarOpen(true)}
                 className="menu-button inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-[#f98c25] hover:bg-gray-100 focus:outline-none"
@@ -159,7 +148,7 @@ const Navbar = () => {
         {/* Overlay */}
         {isSidebarOpen && (
           <div
-            className="fixed inset-0 bg-black bg-opacity-50 z-20 lg:hidden transition-opacity"
+            className="fixed inset-0 bg-[#00000052] bg-opacity-50 z-20 lg:hidden transition-opacity"
             onClick={() => setIsSidebarOpen(false)}
           />
         )}
@@ -219,16 +208,6 @@ const Navbar = () => {
                   )}
                 </div>
               ))}
-            </div>
-
-            {/* Sidebar CTA */}
-            <div className="mt-6 px-3">
-              <a
-                href="#"
-                className="block text-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#f98c25] hover:bg-[#e07b14] transition-colors"
-              >
-                Get Started
-              </a>
             </div>
           </div>
         </div>
