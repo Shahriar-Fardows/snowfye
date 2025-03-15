@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 
-const AllProductsSlider = () => {
+const AllProductsSlider = ({title}) => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
   const sliderRef = useRef(null);
@@ -54,7 +54,7 @@ const AllProductsSlider = () => {
     <section className="py-12 md:py-16 bg-white">
       <div className="container mx-auto px-3 md:px-4">
         <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-800">Best Products</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-800">{title}</h2>
           
           {/* Slider Navigation Buttons */}
           <div className="flex space-x-2">

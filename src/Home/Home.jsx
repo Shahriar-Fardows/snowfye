@@ -9,10 +9,11 @@ const Home = () => {
         <div className=""> 
           <Bennar/>
           <div>
-            <Products/>
+            <Products title="Latest Fashion Trends" />
             <AdSection/>
             <FeaturedProductsGrid/>
             <Testimonials/>
+            <Products title="Style Picks for You"/>
           </div>
         </div>
     );

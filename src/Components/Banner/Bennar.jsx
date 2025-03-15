@@ -49,7 +49,7 @@ const Bennar = () => {
                                         {slide.buttonText && slide.buttonLink && (
                                             <a 
                                                 href={slide.buttonLink} 
-                                                className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-md transition-colors"
+                                                className="px-6 py-3 bg-[#f98c25] hover:bg-[#be9269] text-white font-medium rounded-md transition-colors"
                                             >
                                                 {slide.buttonText}
                                             </a>
