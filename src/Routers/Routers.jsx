@@ -3,6 +3,7 @@ import { lazy, Suspense } from "react";
 import ErrorPage from "../Error/ErrorPage";
 import Home from "../Home/Home";
 import LoadingSpinner from "../Shared/LoadingSpinner";
+import Login from "../log/Login/Login";
 
 // Define the wait function
 const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -25,6 +26,14 @@ const Routers = createBrowserRouter([
                 element: (
                   <Suspense fallback={<LoadingSpinner />}>
                     <Home />
+                  </Suspense>
+                ),
+            },
+            {
+                path: "/login",
+                element: (
+                  <Suspense fallback={<LoadingSpinner />}>
+                    <Login />
                   </Suspense>
                 ),
             },

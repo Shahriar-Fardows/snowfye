@@ -1,11 +1,8 @@
-"use client"
-
 import { useState, useEffect, useRef } from "react"
 import axios from "axios"
 
 const TestimonialCarousel = () => {
   const [testimonials, setTestimonials] = useState([])
-  const [loading, setLoading] = useState(true)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isTransitioning, setIsTransitioning] = useState(false)
   const carouselRef = useRef(null)
@@ -45,11 +42,9 @@ const TestimonialCarousel = () => {
           data = [...data, ...data]
         }
         setTestimonials(data)
-        setLoading(false)
       })
       .catch((error) => {
         console.error("Error fetching testimonials:", error)
-        setLoading(false)
         // Provide fallback data in case of error
         const fallbackData = [
           {
@@ -173,15 +168,6 @@ const TestimonialCarousel = () => {
     autoplayRef.current = setInterval(() => {
       nextSlide()
     }, 3000)
-  }
-
-  // Render loading state
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center h-64">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-      </div>
-    )
   }
 
   // If no testimonials found
