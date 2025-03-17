@@ -2,7 +2,7 @@ import { createContext } from "react";
 
 const AuthContext = createContext(null);
 
-const Context = () => {
+const Context = ({children}) => {
 
     const userInfo = {
         name: "John"
@@ -11,7 +11,7 @@ const Context = () => {
 
     return (
         <AuthContext.Provider value={userInfo}>
-            
+            {children}
         </AuthContext.Provider>
     );
 };
