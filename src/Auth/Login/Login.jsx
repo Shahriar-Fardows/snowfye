@@ -1,17 +1,48 @@
 import { Link } from "react-router-dom";
 import images from "../../assets/images";
+import useAuthContext from "../../Hooks/useAuthContext";
+import Swal from "sweetalert2";
 
 const Login = () => {
+
+  const { login } = useAuthContext();
+
+  const userSignIn = (e) => {
+    e.preventDefault()
+    const from = new FormData(e.target)
+    const email = from.get('email')
+    const password = from.get('password')
+    console.log(email, password)
+
+    // user sign in logic here
+    login(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user)
+        Swal.fire({
+          icon: 'success',
+          title: 'Account Created',
+          text: 'Your account has been created successfully',
+        }).then(() => {
+          window.location.href = '/'
+        })
+      })
+
+  }
+
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg">
         {/* Logo Section */}
         <div className="flex justify-center">
-          <img 
-            src={images?.image?.logo} 
-            alt="Logo" 
+        <Link to='/'>
+         <img
+            src={images?.image?.logo}
+            alt="Logo"
             className="h-16 w-auto object-contain"
           />
+          </Link>
         </div>
 
         {/* Heading */}
@@ -21,7 +52,7 @@ const Login = () => {
         </div>
 
         {/* Form */}
-        <form className="space-y-6">
+        <form onSubmit={userSignIn} className="space-y-6">
           <div>
             <label htmlFor="email" className="block text-sm font-medium text-gray-700">
               Email address
@@ -29,6 +60,7 @@ const Login = () => {
             <input
               type="email"
               id="email"
+              name="email"
               className="mt-1 outline-none w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition duration-200"
               placeholder="Enter your email"
               required
@@ -42,6 +74,7 @@ const Login = () => {
             <input
               type="password"
               id="password"
+              name="password"
               className="mt-1 outline-none w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition duration-200"
               placeholder="Enter your password"
               required

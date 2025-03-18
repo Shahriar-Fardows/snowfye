@@ -3,8 +3,8 @@ import { lazy, Suspense } from "react";
 import ErrorPage from "../Error/ErrorPage";
 import Home from "../Home/Home";
 import LoadingSpinner from "../Shared/LoadingSpinner";
-import Login from "../log/Login/Login";
-import Register from "../log/Register/Register";
+import Login from "../Auth/Login/Login";
+import Register from "../Auth/Register/Register";
 
 // Define the wait function
 const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));

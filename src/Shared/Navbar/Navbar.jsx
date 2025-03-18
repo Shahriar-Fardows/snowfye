@@ -2,10 +2,13 @@ import { useState, useEffect } from "react"
 import { Menu, X, ChevronDown  } from "lucide-react"
 import images from "../../assets/images"
 import CartLogButton from "../../Components/Reusable/Cart&log/CartLogButton"
+import useAuthContext from "../../Hooks/useAuthContext"
 
 const Navbar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const [openSubmenu, setOpenSubmenu] = useState(null)
+  const {user} = useAuthContext();
+  console.log(user)
 
   // Close sidebar when clicking outside
   useEffect(() => {

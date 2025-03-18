@@ -1,60 +1,69 @@
 import { createContext, useEffect, useState } from "react";
-import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
-import app from "../log/Firebase/Firebase";
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile,} from "firebase/auth";
+import app from "../Auth/Firebase/Firebase";
 
 export const Contexts = createContext();
-
 const auth = getAuth(app);
 
-
-const Context = ({children}) => {
-
+const Context = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
-
-    // Set an authentication state observer and get user data
-
+    // Authentication state observer
     useEffect(() => {
-        const unSubscribe = onAuthStateChanged(auth, user => {
-            setUser(user);
+        const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser);
             setLoading(false);
-        })
-        return () => {
-            unSubscribe();
-        }
-    }, [])
+        });
 
-    // loading spinner
+        return () => unSubscribe();
+    }, []);
 
-    // Google login 
-    const provider  = new GoogleAuthProvider();
+    // Google login
+    const provider = new GoogleAuthProvider();
+    const google = () => {
+        setLoading(true);
+        return signInWithPopup(auth, provider)
+            .finally(() => setLoading(false));
+    };
 
-    const google = () =>{
-        return signInWithPopup(auth , provider);
-    }
-
-    // email and password register
-    const createUser = (email, password) => {
+    // Name, Email and Password Register
+    const createUser = (name, email, password) => {
+        setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password)
-    }
-    
-    // email and password login
-    const loginUser = (email, password) => {
-        setLoading(true)
-        return signInWithEmailAndPassword(auth, email, password);
-    }
+            .then((userCredential) => {
+                const user = userCredential.user;
+                // Update display name
+                return updateProfile(user, { displayName: name });
+            })
+            .catch((error) => {
+                console.error("Registration Error:", error.message);
+                throw error;
+            })
+            .finally(() => setLoading(false));
+    };
 
-    // forgot password
+    // Email and Password Login
+    const loginUser = (email, password) => {
+        setLoading(true);
+        return signInWithEmailAndPassword(auth, email, password)
+            .finally(() => setLoading(false));
+    };
+
+    // Forgot password
     const forgotPassword = (email) => {
         return sendPasswordResetEmail(auth, email);
-     }
+    };
 
-    // logout
+    // Log out
     const LogOut = () => {
-        return signOut(auth);
-    }
+        setLoading(true);
+        return signOut(auth)
+            .then(() => setUser(null))
+            .finally(() => setLoading(false));
+    };
 
+    // Context value
     const info = {
         user,
         loading,
@@ -62,14 +71,10 @@ const Context = ({children}) => {
         createUser,
         loginUser,
         forgotPassword,
-        LogOut
-    }
+        LogOut,
+    };
 
-    return (
-        <Contexts.Provider value={info}>
-            {children}
-        </Contexts.Provider>
-    );
+    return <Contexts.Provider value={info}>{children}</Contexts.Provider>;
 };
 
 export default Context;

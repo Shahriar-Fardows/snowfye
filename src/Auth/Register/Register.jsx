@@ -1,51 +1,65 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import images from "../../assets/images";
 import Swal from "sweetalert2";
 import useAuthContext from "../../Hooks/useAuthContext";
 
 const Register = () => {
+  const { createUser, user } = useAuthContext();
+  console.log(user);
+const navigate = useNavigate(); // Use useNavigate for redirecting
 
-    const {createUser} = useAuthContext();
+const userSignUp = (e) => {
+  e.preventDefault();
+  const form = new FormData(e.target); // Typo fixed: 'from' -> 'form'
+  const name = form.get('name');
+  const email = form.get('email');
+  const password = form.get('password');
+  const confirmPassword = form.get('confirm-password');
+  console.log(name, email, password, confirmPassword);
 
-    const userSignUp = (e) => {
-        e.preventDefault() 
-        const from = new FormData(e.target)
-        const email = from.get('email')
-        const password = from.get('password')
-        const confirmPassword = from.get('confirm-password')
-        console.log(email, password, confirmPassword)
+  // Password match check
+  if (password !== confirmPassword) {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Password does not match",
+    });
+    return;
+  }
 
-        if (password !== confirmPassword) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Password does not match',
-            })
-        }
-         
-        createUser(email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            console.log(user)
-            Swal.fire({
-                icon: 'success',
-                title: 'Account Created',
-                text: 'Your account has been created successfully',
-            })
-        })
-    }
-
+  createUser(name, email, password)
+    .then((user) => {
+      console.log(user, "User created successfully");
+      Swal.fire({
+        icon: "success",
+        title: "Account Created",
+        text: "Your account has been created successfully",
+      }).then(() => {
+        navigate("/"); // Redirect to homepage
+      });
+    })
+    .catch((error) => {
+      console.error("Error during signup:", error); // Log error for debugging
+      Swal.fire({
+        icon: "error",
+        title: "Registration Failed",
+        text: error.message || "Something went wrong!",
+      });
+    });
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-2xl w-full space-y-8 bg-white p-8 rounded-xl shadow-lg">
         {/* Logo Section */}
         <div className="flex justify-center">
-          <img 
-            src={images?.image?.logo} 
-            alt="Logo" 
+         <Link to='/'>
+         <img
+            src={images?.image?.logo}
+            alt="Logo"
             className="h-16 w-auto object-contain"
           />
+          </Link>
         </div>
 
         {/* Heading */}
@@ -57,9 +71,18 @@ const Register = () => {
         {/* Form */}
         <form onSubmit={userSignUp} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Email address
-            </label>
+            <label className="block text-sm font-medium text-gray-700">Your full name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              className="mt-1 outline-none w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition duration-200"
+              placeholder="Enter your Name"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Email address</label>
             <input
               type="email"
               id="email"
@@ -71,13 +94,11 @@ const Register = () => {
           </div>
 
           <div>
-            <label  className="block text-sm font-medium text-gray-700">
-              Password
-            </label>
+            <label className="block text-sm font-medium text-gray-700">Password</label>
             <input
               type="password"
               id="password"
-                name="password"
+              name="password"
               className="mt-1 outline-none w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition duration-200"
               placeholder="Create a password"
               required
@@ -85,13 +106,11 @@ const Register = () => {
           </div>
 
           <div>
-            <label  className="block text-sm font-medium text-gray-700">
-              Confirm Password
-            </label>
+            <label className="block text-sm font-medium text-gray-700">Confirm Password</label>
             <input
               type="password"
               id="confirm-password"
-                name="confirm-password"
+              name="confirm-password"
               className="mt-1 outline-none w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition duration-200"
               placeholder="Confirm your password"
               required
