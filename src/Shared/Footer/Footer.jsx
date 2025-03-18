@@ -1,8 +1,8 @@
-"use client"
-
 import { useState } from "react"
 import { FaFacebook, FaInstagram, FaTiktok, FaArrowUp } from "react-icons/fa"
 import { Link } from "react-router-dom"
+import images from "../../assets/images"
+
 
 const Footer = () => {
     const [email, setEmail] = useState("")
@@ -150,45 +150,11 @@ const Footer = () => {
 
                     <div className="flex flex-wrap justify-center gap-2">
                         <img
-                            src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/american_express-2264c9b8b57b23b0b0831827e90cd7bcda2836adc42a912ebedf545dead35b20.svg"
+                            src={images?.image?.bkash}
                             alt="American Express"
                             className="h-8"
                         />
-                        <img
-                            src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/apple_pay-f6db0077dc7c325b436ecbdcf254239100b35b70b1663bc7523d7c424901fa09.svg"
-                            alt="Apple Pay"
-                            className="h-8"
-                        />
-                        <img
-                            src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/diners_club-16436b9fb6dd9060edb51f1c7c44e23941e544ad798282d6aef1604319562fba.svg"
-                            alt="Diners Club"
-                            className="h-8"
-                        />
-                        <img
-                            src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/discover-cc9808e50193c7496e7a5245eb86d5e06f02e2476c0fe70f2c40016707d35461.svg"
-                            alt="Discover"
-                            className="h-8"
-                        />
-                        <img
-                            src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/google_pay-c66a29c63facf2053bf69352982c958e9675cabea4f2f7ccec08d169d1856b31.svg"
-                            alt="Google Pay"
-                            className="h-8"
-                        />
-                        <img
-                            src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/master-173035bc8124581983d4efa50cf8626e8553c2b311353fbf67485f9c1a2b88d1.svg"
-                            alt="Mastercard"
-                            className="h-8"
-                        />
-                        <img
-                            src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/paypal-49e4c1e03244b6d2de0d270ca0d22dd15da6e92cc7266e93eb43762df5aa355d.svg"
-                            alt="PayPal"
-                            className="h-8"
-                        />
-                        <img
-                            src="https://cdn.shopify.com/shopifycloud/shopify/assets/payment_icons/visa-319d545c6fd255c9aad5eeaad21fd6f7f7b4fdbdb1a35ce83b89cca12a187f00.svg"
-                            alt="Visa"
-                            className="h-8"
-                        />
+                       
                     </div>
                 </div>
             </div>

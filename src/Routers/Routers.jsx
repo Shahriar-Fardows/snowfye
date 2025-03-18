@@ -4,6 +4,7 @@ import ErrorPage from "../Error/ErrorPage";
 import Home from "../Home/Home";
 import LoadingSpinner from "../Shared/LoadingSpinner";
 import Login from "../log/Login/Login";
+import Register from "../log/Register/Register";
 
 // Define the wait function
 const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -29,16 +30,25 @@ const Routers = createBrowserRouter([
                   </Suspense>
                 ),
             },
-            {
-                path: "/login",
-                element: (
-                  <Suspense fallback={<LoadingSpinner />}>
-                    <Login />
-                  </Suspense>
-                ),
-            },
+            
         ],
     },
+    {
+      path: "/login",
+      element: (
+        <Suspense fallback={<LoadingSpinner />}>
+          <Login />
+        </Suspense>
+      ),
+  },
+    {
+      path: "/register",
+      element: (
+        <Suspense fallback={<LoadingSpinner />}>
+          <Register />
+        </Suspense>
+      ),
+  },
 ]);
 
 export default Routers;
