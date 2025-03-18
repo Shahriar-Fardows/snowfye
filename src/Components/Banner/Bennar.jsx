@@ -1,11 +1,12 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
+import useAxios from "../../Hooks/useAxios";
 
 const Bennar = () => {
     const [slider, setSlider] = useState([]);
-    
+    const axios = useAxios();
+
     useEffect(() => {
-        axios.get("http://localhost:5000/slider")
+        axios.get("/slider")
             .then((response) => {
                 setSlider(response.data);
             });

@@ -1,16 +1,15 @@
-"use client"
-
-import { useState, useEffect } from "react"
-import axios from "axios"
+import { useEffect, useState } from "react"
+import useAxios from "../../Hooks/useAxios"
 
 const AdBanners = () => {
   const [ads, setAds] = useState([])
   const [error, setError] = useState(null)
+  const axios = useAxios()
 
   useEffect(() => {
     const fetchAds = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/ad-banner")
+        const response = await axios.get("/ad-banner")
         setAds(response.data)
       } catch (err) {
         console.error("Error fetching ads:", err)

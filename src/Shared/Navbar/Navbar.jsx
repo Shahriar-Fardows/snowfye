@@ -40,7 +40,7 @@ const Navbar = () => {
     },
     {
       title: "All Products",
-      url: "/products",
+      url: "/all-products",
     },
     {
       title: "About Us",

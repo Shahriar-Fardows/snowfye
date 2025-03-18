@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react"
-import axios from "axios"
+import { useEffect, useRef, useState } from "react"
+import useAxios from "../../Hooks/useAxios"
 
 const TestimonialCarousel = () => {
   const [testimonials, setTestimonials] = useState([])
@@ -8,6 +8,8 @@ const TestimonialCarousel = () => {
   const carouselRef = useRef(null)
   const autoplayRef = useRef(null)
   const [itemsPerView, setItemsPerView] = useState(3) // Dynamic based on screen size
+  const axios = useAxios();
+
 
   // Handle responsive items per view
   useEffect(() => {
@@ -34,7 +36,7 @@ const TestimonialCarousel = () => {
   // Fetch testimonials
   useEffect(() => {
     axios
-      .get("http://localhost:5000/testimonials")
+      .get("/testimonials")
       .then((response) => {
         // If we have fewer than itemsPerView testimonials, duplicate them to fill the view
         let data = response.data

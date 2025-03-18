@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import useAxios from "../../Hooks/useAxios";
+import { Link } from "react-router-dom";
 
 const FeaturedProductsGrid = () => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
+  const axios = useAxios();
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/products");
+        const response = await axios.get("/products");
         // Limit to 8 products
         setProducts(response.data.slice(0, 8));
       } catch (err) {
@@ -51,7 +53,6 @@ const FeaturedProductsGrid = () => {
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-6 lg:gap-8">
           {products.map((product) => (
             <div 
-              key={product._id} 
               className="group relative bg-white overflow-hidden rounded-lg md:rounded-xl border border-gray-100 hover:border-gray-200 hover:shadow-lg transition-all duration-300 cursor-pointer"
               onClick={() => navigateToProductDetails(product._id)}
             >
@@ -102,9 +103,11 @@ const FeaturedProductsGrid = () => {
               
               {/* Hover overlay */}
               <div className="absolute inset-0 bg-[#0000005e] bg-opacity-0 group-hover:bg-opacity-5 hidden md:flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+              <Link to={`/products/${product._id}`} key={product._id} >
                 <span className="px-4 py-2 bg-white bg-opacity-90 rounded-full text-sm font-medium text-gray-800 shadow-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                   View Details
                 </span>
+                </Link>
               </div>
             </div>
           ))}

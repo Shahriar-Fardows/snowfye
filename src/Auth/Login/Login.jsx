@@ -5,7 +5,7 @@ import Swal from "sweetalert2";
 
 const Login = () => {
 
-  const { login } = useAuthContext();
+  const { loginUser } = useAuthContext();
 
   const userSignIn = (e) => {
     e.preventDefault()
@@ -15,7 +15,7 @@ const Login = () => {
     console.log(email, password)
 
     // user sign in logic here
-    login(email, password)
+    loginUser(email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user)

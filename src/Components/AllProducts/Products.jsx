@@ -1,15 +1,17 @@
-import { useEffect, useState, useRef } from "react";
-import axios from "axios";
+import { useEffect, useRef, useState } from "react";
+import useAxios from "../../Hooks/useAxios";
+import { Link } from "react-router-dom";
 
 const AllProductsSlider = ({title}) => {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
   const sliderRef = useRef(null);
+  const axios = useAxios();
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/products");
+        const response = await axios.get("/products");
         setProducts(response.data);
       } catch (err) {
         setError("Failed to load products. Please try again later.");
@@ -87,8 +89,8 @@ const AllProductsSlider = ({title}) => {
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {products.map((product) => (
-              <div 
-                key={product._id} 
+              <Link to={`/products/${product._id}`} key={product._id} >
+                <div  
                 className="flex-none w-[250px] md:w-[280px] mr-4 snap-start"
               >
                 <div 
@@ -141,6 +143,7 @@ const AllProductsSlider = ({title}) => {
                   </div>
                 </div>
               </div>
+              </Link>
             ))}
           </div>
           

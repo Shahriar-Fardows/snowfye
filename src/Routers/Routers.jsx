@@ -5,6 +5,10 @@ import Home from "../Home/Home";
 import LoadingSpinner from "../Shared/LoadingSpinner";
 import Login from "../Auth/Login/Login";
 import Register from "../Auth/Register/Register";
+import AllProducts from "../page/AllProducts/AllProducts";
+import PrivetRoutes from "./PrivetRoutes";
+import Product from "../Components/AllProducts/Product";
+import Cart from "../page/Cart/Cart";
 
 // Define the wait function
 const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -13,41 +17,75 @@ const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 const Root = lazy(() => wait(3000).then(() => import("../Root")));
 
 const Routers = createBrowserRouter([
-    {
+  {
+    path: "/",
+    element: (
+      <Suspense fallback={<LoadingSpinner />}>
+        <Root />
+      </Suspense>
+    ),
+    errorElement: <ErrorPage />,
+    children: [
+      {
         path: "/",
         element: (
           <Suspense fallback={<LoadingSpinner />}>
-            <Root />
+            <Home />
           </Suspense>
         ),
-        errorElement: <ErrorPage />,
-        children: [
-            {
-                path: "/",
-                element: (
-                  <Suspense fallback={<LoadingSpinner />}>
-                    <Home />
-                  </Suspense>
-                ),
-            },
-            
-        ],
-    },
-    {
-      path: "/login",
-      element: (
-        <Suspense fallback={<LoadingSpinner />}>
-          <Login />
-        </Suspense>
-      ),
+      },
+      {
+        path: "/all-products",
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <PrivetRoutes>
+              <AllProducts />
+            </PrivetRoutes>
+          </Suspense>
+        ),
+      },
+      {
+        path: "/products/:id",
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <PrivetRoutes>
+              <Product />
+            </PrivetRoutes>
+          </Suspense>
+        ),
+        loader: ({params})=> fetch(`http://localhost:5000/products/${params.id}`)
+        
+      },
+      {
+        path: "/cart",
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <PrivetRoutes>
+              <Cart />
+            </PrivetRoutes>
+          </Suspense>
+        ),
+        loader: ({params})=> fetch(`http://localhost:5000/products/${params.id}`)
+        
+      },
+
+    ],
   },
-    {
-      path: "/register",
-      element: (
-        <Suspense fallback={<LoadingSpinner />}>
-          <Register />
-        </Suspense>
-      ),
+  {
+    path: "/login",
+    element: (
+      <Suspense fallback={<LoadingSpinner />}>
+        <Login />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/register",
+    element: (
+      <Suspense fallback={<LoadingSpinner />}>
+        <Register />
+      </Suspense>
+    ),
   },
 ]);
 
