@@ -9,6 +9,7 @@ import AllProducts from "../page/AllProducts/AllProducts";
 import PrivetRoutes from "./PrivetRoutes";
 import Product from "../Components/AllProducts/Product";
 import Cart from "../page/Cart/Cart";
+import Checkout from "../page/CheckOut/CheckOut";
 
 // Define the wait function
 const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -65,8 +66,18 @@ const Routers = createBrowserRouter([
             </PrivetRoutes>
           </Suspense>
         ),
-        loader: ({params})=> fetch(`http://localhost:5000/products/${params.id}`)
+      
         
+      },
+      {
+        path: "/check-out",
+        element: (
+          <Suspense fallback={<LoadingSpinner />}>
+            <PrivetRoutes>
+              <Checkout />
+            </PrivetRoutes>
+          </Suspense>
+        ),
       },
 
     ],

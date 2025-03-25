@@ -53,6 +53,7 @@ const FeaturedProductsGrid = () => {
         <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-6 lg:gap-8">
           {products.map((product) => (
             <div 
+              key={product._id}
               className="group relative bg-white overflow-hidden rounded-lg md:rounded-xl border border-gray-100 hover:border-gray-200 hover:shadow-lg transition-all duration-300 cursor-pointer"
               onClick={() => navigateToProductDetails(product._id)}
             >
