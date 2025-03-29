@@ -158,7 +158,7 @@ const Checkout = () => {
      
 
     } catch (err) {
-      setError("Failed to place order. Please try again.", err);
+      console.error("Order Error:", err);
     } finally {
       setOrderLoading(false);
     }

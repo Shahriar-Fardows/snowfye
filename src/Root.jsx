@@ -4,8 +4,10 @@ import Footer from "./Shared/Footer/Footer";
 
 const Root = () => {
     return (
-        <div className="flex flex-col min-h-screen">
+        <div className="relative  flex flex-col min-h-screen">
+      <div className="sticky top-0 left-0 right-0 z-10">
       <Navbar />
+      </div>
       <div className="flex-grow">
         <Outlet />
       </div>

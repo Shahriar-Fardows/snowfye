@@ -21,8 +21,8 @@ const Login = () => {
         console.log(user)
         Swal.fire({
           icon: 'success',
-          title: 'Account Created',
-          text: 'Your account has been created successfully',
+          title: ' Success',
+          text: 'Login successful!',
         }).then(() => {
           window.location.href = '/'
         })

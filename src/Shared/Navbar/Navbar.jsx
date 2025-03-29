@@ -65,9 +65,9 @@ const Navbar = () => {
   return (
     <div>
       {/* Announcement Bar */}
-      <div className="bg-[#f98c25] py-2 px-4 text-white text-center text-sm font-medium">
+      {/* <div className="bg-[#f98c25] py-2 px-4 text-white text-center text-sm font-medium">
         Special offer: 20% off all services this month!
-      </div>
+      </div> */}
 
       {/* Navbar */}
       <div className="bg-white shadow-sm relative z-10">
