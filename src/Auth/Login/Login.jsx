@@ -16,17 +16,26 @@ const Login = () => {
 
     // user sign in logic here
     loginUser(email, password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(user)
-        Swal.fire({
-          icon: 'success',
-          title: ' Success',
-          text: 'Login successful!',
-        }).then(() => {
-          window.location.href = '/'
-        })
-      })
+  .then((userCredential) => {
+    const user = userCredential.user;
+    console.log(user)
+    Swal.fire({
+      icon: 'success',
+      title: 'Success',
+      text: 'Login successful!',
+    }).then(() => {
+      window.location.href = '/'
+    })
+  })
+  .catch((error) => {
+    console.error(error);
+    Swal.fire({
+      icon: 'error',
+      title: 'Login Failed',
+      text: 'Password! is incorrect',
+    });
+  });
+
 
   }
 
@@ -93,9 +102,9 @@ const Login = () => {
                 Remember me
               </label>
             </div>
-            <a href="#" className="text-sm text-orange-500 hover:text-orange-600">
+            <Link to='/forget-password' className="text-sm text-orange-500 hover:text-orange-600">
               Forgot password?
-            </a>
+            </Link>
           </div>
 
           {/* Submit Button */}

@@ -12,6 +12,7 @@ import Cart from "../page/Cart/Cart";
 import Checkout from "../page/CheckOut/CheckOut";
 import About from "../page/About/About";
 import Contact from "../page/Contact/Contact";
+import ForgetPage from "../Auth/Forget/Forget";
 
 // Define the wait function
 const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -113,6 +114,14 @@ const Routers = createBrowserRouter([
     element: (
       <Suspense fallback={<LoadingSpinner />}>
         <Register />
+      </Suspense>
+    ),
+  },
+  {
+    path: "/forget-password",
+    element: (
+      <Suspense fallback={<LoadingSpinner />}>
+        <ForgetPage />
       </Suspense>
     ),
   },
