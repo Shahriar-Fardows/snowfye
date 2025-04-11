@@ -11,6 +11,7 @@ import Swal from "sweetalert2"
 const ProductDetails = () => {
     // This would come from your API in a real application
     const product = useLoaderData()
+    console.log(product)
     const [expanded, setExpanded] = useState(true)
     const { user } = useAuthContext();
     const [selectedSize, setSelectedSize] = useState("")
