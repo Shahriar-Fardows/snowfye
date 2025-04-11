@@ -136,7 +136,7 @@ const About = () => {
                     <div className="mt-8 flex lg:mt-0 lg:flex-shrink-0">
                         <div className="inline-flex rounded-md shadow">
                             <Link
-                                to="/products"
+                                to="/all-products"
 
                                 className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-[#f78c2a] bg-white hover:bg-gray-50"
                             >
