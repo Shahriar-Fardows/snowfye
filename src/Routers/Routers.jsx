@@ -11,6 +11,7 @@ import Product from "../Components/AllProducts/Product";
 import Cart from "../page/Cart/Cart";
 import Checkout from "../page/CheckOut/CheckOut";
 import About from "../page/About/About";
+import Contact from "../page/Contact/Contact";
 
 // Define the wait function
 const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -37,10 +38,10 @@ const Routers = createBrowserRouter([
         ),
       },
       {
-        path: "/",
+        path: "/contact",
         element: (
           <Suspense fallback={<LoadingSpinner />}>
-            <Home />
+            <Contact />
           </Suspense>
         ),
       },
